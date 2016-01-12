@@ -137,6 +137,14 @@ io.on('connection', function(socket){
     led.off();
     //ledR.fadeOut(500); ledG.fadeOut(500); ledB.fadeOut(500);
   });
+
+  socket.on('averageLoop', function(average){
+    console.log('average Loop : ' + average);
+    led.intensity(average);
+    //led.off();
+    //ledR.fadeOut(500); ledG.fadeOut(500); ledB.fadeOut(500);
+  });
+
 });
 
 

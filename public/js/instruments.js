@@ -27,6 +27,8 @@ window.requestAnimFrame = (function () {
     var instrumentSelected = "guitar";
     var instrumentPathMusic = "./audio/guitare.mp3";
 
+    var isPlayingSound = false;
+
 
 
 	//socket.emit('message', "test");
@@ -45,6 +47,9 @@ window.requestAnimFrame = (function () {
     	numeroCorrespondanceMusic(numberDial);
 
     	loadSound(instrumentPathMusic);
+    	/*setTimeout(function() {
+    		console.log("average : "+ average);
+    	}, 500);*/
   	});
 
     console.log( "ready!" );
@@ -326,6 +331,8 @@ window.requestAnimFrame = (function () {
             context.decodeAudioData(request.response, function(buffer) {
                 // when the audio is decoded play the sound
                 playSound(buffer);
+
+                isPlayingSound = true;
             }, onError);
         }
         request.send();
@@ -341,6 +348,7 @@ window.requestAnimFrame = (function () {
 
     function onEnded() {
 	    console.log('playback finished');
+	    isPlayingSound = false;
 	    socket.emit('musicFinished', "end");
 	    setupAudioNodes();
 
@@ -383,12 +391,18 @@ window.requestAnimFrame = (function () {
         return average;
     }
 
-    /*animate();
+    animate();
 	function animate() {
 
 	    requestAnimationFrame(animate);
-	    console.log("average : "+ average);
-	}*/
+	    if( average > 0 && isPlayingSound == true) {
+	    	console.log('average '+ average);
+	    	socket.emit('averageLoop', average);
+	    }
+
+	    
+	    //console.log("average : "+ average);
+	}
 
 
 
