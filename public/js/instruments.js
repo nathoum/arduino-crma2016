@@ -45,8 +45,28 @@ window.requestAnimFrame = (function () {
     	//change("guitare.mp3");
 
     	numeroCorrespondanceMusic(numberDial);
+    	//setupAudioNodes();
+    	//setupAudioNodes();
+    	//setupAudioNodes();
+
+
+    	javascriptNode.onaudioprocess = function() {
+
+	        // get the average for the first channel
+	        var array =  new Uint8Array(analyser.frequencyBinCount);
+	        analyser.getByteFrequencyData(array);
+	        average = getAverageVolume(array);
+
+	        // get the average for the second channel
+	        var array2 =  new Uint8Array(analyser2.frequencyBinCount);
+	        analyser2.getByteFrequencyData(array2);
+	        average2 = getAverageVolume(array2);
+
+
+	    }
 
     	loadSound(instrumentPathMusic);
+
     	/*setTimeout(function() {
     		console.log("average : "+ average);
     	}, 500);*/
@@ -320,6 +340,8 @@ window.requestAnimFrame = (function () {
 
     // load the specified sound
     function loadSound(url) {
+    	console.log("play sound");
+    	isPlayingSound = true;
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
         request.responseType = 'arraybuffer';
@@ -330,9 +352,10 @@ window.requestAnimFrame = (function () {
             // decode the data
             context.decodeAudioData(request.response, function(buffer) {
                 // when the audio is decoded play the sound
+
                 playSound(buffer);
 
-                isPlayingSound = true;
+                //isPlayingSound = true;
             }, onError);
         }
         request.send();
@@ -348,9 +371,11 @@ window.requestAnimFrame = (function () {
 
     function onEnded() {
 	    console.log('playback finished');
+	    //setupAudioNodes();
+	    setupAudioNodes();
 	    isPlayingSound = false;
 	    socket.emit('musicFinished', "end");
-	    setupAudioNodes();
+	    
 
 
 	    
@@ -362,7 +387,7 @@ window.requestAnimFrame = (function () {
     }
 
     // quand le noeud javascript est appelé on utilise l'information de l'analyseur pour se servir des données de volume
-    javascriptNode.onaudioprocess = function() {
+    /*javascriptNode.onaudioprocess = function() {
 
         // get the average for the first channel
         var array =  new Uint8Array(analyser.frequencyBinCount);
@@ -375,7 +400,7 @@ window.requestAnimFrame = (function () {
         average2 = getAverageVolume(array2);
 
 
-    }
+    }*/
 
     function getAverageVolume(array) {
         var values = 0;
@@ -393,10 +418,10 @@ window.requestAnimFrame = (function () {
 
     animate();
 	function animate() {
-
+		console.log('average '+ average);
 	    requestAnimationFrame(animate);
 	    if( average > 0 && isPlayingSound == true) {
-	    	console.log('average '+ average);
+	    	//console.log('average '+ average);
 	    	socket.emit('averageLoop', average);
 	    }
 
