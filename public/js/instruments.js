@@ -24,7 +24,9 @@ $(document).ready(function () {
     	console.log("instru - "+instrumentSelected);
 
     	changeActiveInstrument(numberSelected, instrumentSelected);
-    	change("guitare.mp3");
+    	//change("guitare.mp3");
+
+    	loadSound("./audio/guitare.mp3")
   	});
 
     console.log( "ready!" );
@@ -131,59 +133,190 @@ $(document).ready(function () {
 		var selectorNumber = ".Menu-item--"+number;
 		$(selectorNumber).addClass("Menu-item--active");
 
-		$(".link--urpi").text(instrument);
-		$(".link--urpi").attr("data-letters", instrument);
-		$(".link--urpi").addClass("splitdown").addClass("splitup").addClass("link-anim");
+		$(".link--urpi").addClass("splitdownout").addClass("splitupout").addClass("link-anim");
 
 		setTimeout(function(){
-		  $(".link--urpi").removeClass("splitdown").removeClass("splitup").removeClass("link-anim");
-		}, 1500);
+			$(".link--urpi").removeClass("splitdownout").removeClass("splitupout").removeClass("link-anim");
+			$(".link--urpi").text(instrument);
+			$(".link--urpi").attr("data-letters", instrument);
+			$(".link--urpi").addClass("splitdownin").addClass("splitupin");
+		}, 800);
+
+		setTimeout(function(){
+			$(".link--urpi").removeClass("splitdownin").removeClass("splitupin");
+		}, 2800);
+		
 	}
 
 	function numeroCorrespondanceInstrument(numberDial) {
 		switch (numberDial) {
-    		case 0:
+    		case 1:
         		instrumentSelected = "guitar";
         	break;
 
-        	case 1:
+        	case 2:
         		instrumentSelected = "piano";
         	break;
 
-        	case 2:
+        	case 3:
         		instrumentSelected = "trumpet";
         	break;
 
-        	case 3:
+        	case 4:
         		instrumentSelected = "maracas";
         	break;
 
-        	case 4:
+        	case 5:
         		instrumentSelected = "violin";
         	break;
 
-        	case 5:
-        		instrumentSelected = "cuivre";
-        	break;
-
         	case 6:
-        		instrumentSelected = "tambour";
+        		instrumentSelected = "saxophone";
         	break;
 
         	case 7:
-        		instrumentSelected = "accordion";
+        		instrumentSelected = "drum";
         	break;
 
         	case 8:
-        		instrumentSelected = "xylophone";
+        		instrumentSelected = "accordion";
         	break;
 
         	case 9:
+        		instrumentSelected = "xylophone";
+        	break;
+
+        	case 10:
         		instrumentSelected = "flute";
         	break;
         }
 
 	}
+
+	//********************** AUDIO ********
+	// creation of the audio context
+    if (! window.AudioContext) {
+        if (! window.webkitAudioContext) {
+            alert('no audiocontext found');
+        }
+        window.AudioContext = window.webkitAudioContext;
+    }
+    var context = new AudioContext();
+    var audioBuffer;
+    var sourceNode;
+    var splitter;
+    var analyser, analyser2;
+    var javascriptNode;
+
+    
+
+    // load the sound
+    setupAudioNodes();
+
+    function setupAudioNodes() {
+
+        // setup a javascript node
+        javascriptNode = context.createScriptProcessor(2048, 1, 1);
+        // connect to destination, else it isn't called
+        javascriptNode.connect(context.destination);
+
+
+        // setup : analyzer
+        analyser = context.createAnalyser();
+        analyser.smoothingTimeConstant = 0.3;
+        analyser.fftSize = 1024;
+
+        analyser2 = context.createAnalyser();
+        analyser2.smoothingTimeConstant = 0.0;
+        analyser2.fftSize = 1024;
+
+        // creation of a buffer source node
+        sourceNode = context.createBufferSource();
+        splitter = context.createChannelSplitter();
+
+        // connect the source to the analyser and the splitter
+        sourceNode.connect(splitter);
+
+        // connect one of the outputs from the splitter to
+        // the analyser
+        splitter.connect(analyser,0,0);
+        splitter.connect(analyser2,1,0);
+
+        // connect the splitter to the javascriptnode
+        analyser.connect(javascriptNode);
+
+        // connect to destination
+        sourceNode.connect(context.destination);
+    }
+
+    // load the specified sound
+    function loadSound(url) {
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.responseType = 'arraybuffer';
+
+        // When loaded decode the data
+        request.onload = function() {
+
+            // decode the data
+            context.decodeAudioData(request.response, function(buffer) {
+                // when the audio is decoded play the sound
+                playSound(buffer);
+            }, onError);
+        }
+        request.send();
+    }
+
+
+    function playSound(buffer) {
+        sourceNode.buffer = buffer;
+        sourceNode.start(0);
+        sourceNode.onended = onEnded;
+
+    }
+
+    function onEnded() {
+	    console.log('playback finished');
+	    setupAudioNodes();
+
+
+	    
+	}
+
+    // log if an error occurs
+    function onError(e) {
+        console.log(e);
+    }
+
+    // quand le noeud javascript est appelé on utilise l'information de l'analyseur pour se servir des données de volume
+    javascriptNode.onaudioprocess = function() {
+
+        // get the average for the first channel
+        var array =  new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(array);
+        average = getAverageVolume(array);
+
+        // get the average for the second channel
+        var array2 =  new Uint8Array(analyser2.frequencyBinCount);
+        analyser2.getByteFrequencyData(array2);
+        average2 = getAverageVolume(array2);
+
+
+    }
+
+    function getAverageVolume(array) {
+        var values = 0;
+
+        var length = array.length;
+
+        // get all the frequency amplitudes
+        for (var i = 0; i < length; i++) {
+            values += array[i];
+        }
+
+        average = values / length;
+        return average;
+    }
 
 
 

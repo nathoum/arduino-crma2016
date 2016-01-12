@@ -30,6 +30,30 @@ var cptnb = 0;
 var isAZeroZone = false;
 
 board.on("ready", function() {
+
+  var led = new five.Led.RGB({
+   pins: {
+     red: 9,
+     green: 10,
+     blue: 11
+   }
+  });
+
+  this.repl.inject({
+    led: led
+  });
+
+  //led.on();
+  led.color("#E8AB9C");
+  // led.blink(1000);
+
+
+  // this.repl.inject({
+  //   a: a
+  // });
+
+  // a.strobe(500);
+
   // Assuming a button is attached to pin 9
   this.pinMode(2, five.Pin.INPUT);
   this.digitalRead(2, function(value) {
@@ -58,6 +82,10 @@ board.on("ready", function() {
 
 	    	//io.on('connection', function(socket){
 	    		io.emit('composingNumEnded', cptnb);
+          led.on();
+          setTimeout(function() {
+            led.off();
+          }, 3000);
 	    	//});
 
 	    	
