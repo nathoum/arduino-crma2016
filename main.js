@@ -28,16 +28,19 @@ console.log(musics);
 
 var cptnb = 0;
 var isAZeroZone = false;
+var led;
 
 board.on("ready", function() {
 
-  var led = new five.Led.RGB({
+  led = new five.Led.RGB({
    pins: {
      red: 9,
      green: 10,
      blue: 11
    }
   });
+  // a.strobe(500);
+
 
   this.repl.inject({
     led: led
@@ -46,13 +49,24 @@ board.on("ready", function() {
   //led.on();
   led.color("#E8AB9C");
   // led.blink(1000);
-
+  
 
   // this.repl.inject({
   //   a: a
   // });
 
-  // a.strobe(500);
+
+//******
+
+/*ledR = new five.Led(9); 
+ledG = new five.Led(10); 
+ledB = new five.Led(11);*/
+
+//setColor('blue');
+
+
+
+///******
 
   // Assuming a button is attached to pin 9
   this.pinMode(2, five.Pin.INPUT);
@@ -83,10 +97,18 @@ board.on("ready", function() {
 	    	//io.on('connection', function(socket){
 	    		io.emit('composingNumEnded', cptnb);
           led.on();
-          setTimeout(function() {
+
+          //ledR.fadeIn(500); ledG.fadeIn(500); ledB.fadeIn(500); 
+
+          /*setTimeout(function() {
             led.off();
-          }, 3000);
+          }, 3000);*/
 	    	//});
+
+        /*io.on('musicFinished', function(end){
+          console.log("music end");
+          led.off();
+        });*/
 
 	    	
 
@@ -108,11 +130,14 @@ http.listen(8080, function(){
   console.log('listening on *:8080');
 });
 
-/*io.on('connection', function(socket){
-  socket.on('message', function(msg){
+
+io.on('connection', function(socket){
+  socket.on('musicFinished', function(msg){
     console.log('message: ' + msg);
+    led.off();
+    //ledR.fadeOut(500); ledG.fadeOut(500); ledB.fadeOut(500);
   });
-});*/
+});
 
 
 

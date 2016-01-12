@@ -13,9 +13,25 @@ $(document).ready(function () {
        }
       });*/
 
+window.requestAnimFrame = (function () {
+			    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function ( /* function */ callback, /* DOMElement */ element) {
+			        window.setTimeout(callback, 1000 / 60);
+			    };
+			})();    
+
 	var socket = io();
 
+	var average = 0;
+
+	var numberSelected = 0;
+    var instrumentSelected = "guitar";
+    var instrumentPathMusic = "./audio/guitare.mp3";
+
+
+
 	//socket.emit('message', "test");
+
+	socket.emit('musicFinished', "end");
 
 	socket.on('composingNumEnded', function(numberDial){
     	console.log('composingNumEnded: ' + numberDial);
@@ -26,13 +42,14 @@ $(document).ready(function () {
     	changeActiveInstrument(numberSelected, instrumentSelected);
     	//change("guitare.mp3");
 
-    	loadSound("./audio/guitare.mp3")
+    	numeroCorrespondanceMusic(numberDial);
+
+    	loadSound(instrumentPathMusic);
   	});
 
     console.log( "ready!" );
 
-    var numberSelected = 0;
-    var instrumentSelected = "guitar";
+    
 
     $(".audioDemo").trigger('load');
     $(".audioDemo").bind("load",function(){
@@ -193,6 +210,53 @@ $(document).ready(function () {
 
 	}
 
+	function numeroCorrespondanceMusic(numberDial) {
+		switch (numberDial) {
+    		case 1:
+        		instrumentPathMusic = "./audio/guitare.mp3";
+        	break;
+
+        	case 2:
+        		instrumentPathMusic = "./audio/piano.mp3";
+        	break;
+
+        	case 3:
+        		instrumentPathMusic = "./audio/trumpet.mp3";
+        	break;
+
+        	case 4:
+        		instrumentPathMusic = "./audio/maracas.mp3";
+        	break;
+
+        	case 5:
+        		instrumentPathMusic = "./audio/violin.wav";
+        	break;
+
+        	case 6:
+        		instrumentPathMusic = "./audio/saxophone.mp3";
+        	break;
+
+        	case 7:
+        		instrumentPathMusic = "./audio/drum.mp3";
+        	break;
+
+        	case 8:
+        		instrumentPathMusic = "./audio/accordion.mp3";
+        	break;
+
+        	case 9:
+        		instrumentPathMusic = "./audio/xylophone.mp3";
+        	break;
+
+        	case 10:
+        		instrumentPathMusic = "./audio/flute.wav";
+        	break;
+        }
+
+        return instrumentPathMusic;
+
+	}
+
 	//********************** AUDIO ********
 	// creation of the audio context
     if (! window.AudioContext) {
@@ -277,6 +341,7 @@ $(document).ready(function () {
 
     function onEnded() {
 	    console.log('playback finished');
+	    socket.emit('musicFinished', "end");
 	    setupAudioNodes();
 
 
@@ -317,6 +382,14 @@ $(document).ready(function () {
         average = values / length;
         return average;
     }
+
+    /*animate();
+	function animate() {
+
+	    requestAnimationFrame(animate);
+	    console.log("average : "+ average);
+	}*/
+
 
 
 
