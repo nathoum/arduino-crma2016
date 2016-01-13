@@ -368,6 +368,7 @@ body, html {
     min-width: 60px;
     top: 50%;
     transform: translateY(-50%);
+    padding: 20px 0px;
 }
 
 .Menu-left {
@@ -389,11 +390,11 @@ body, html {
 	padding: 20px 0px;
 }
 
-.Menu-item--active > img {
+/*.Menu-item--active > img {
 	border-top: 2px solid #D45D23;
     border-bottom: 2px solid #D45D23;
     padding: 5px 0px;
-}
+}*/
 
 .Icon {
 	width: 65%;
@@ -438,6 +439,55 @@ body, html {
 	stroke-dasharray: 1450;
 	stroke-dashoffset: 1300;
 	animation: dash 2.0s linear forwards;
+}
+
+.content-text-line {
+	height: 1px;
+    width: 0px;
+    background-color: black;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.content-text-line--bottom {
+	bottom: 10px;
+}
+
+.content-text-line--top {
+	top: 10px;
+}
+
+
+.Menu-item--active .content-text-line  {
+	animation: lineWidthAnim 0.5s linear forwards;
+}
+
+@keyframes lineWidthAnim {
+  to {
+    width: 80%;
+    max-width: 60px;
+  }
+}
+
+@-webkit-keyframes lineWidthAnim {
+	to {
+    width: 80%;
+    max-width: 60px;
+  }
+}
+@-moz-keyframes lineWidthAnim {
+ 	to {
+    width: 80%;
+    max-width: 60px;
+  }
+}
+@-o-keyframes lineWidthAnim {
+  	to {
+    width: 80%;
+    max-width: 60px;
+  }
 }
 
 /*.Menu-item--1 .Icon {
