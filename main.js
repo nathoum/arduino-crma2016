@@ -30,6 +30,8 @@ var cptnb = 0;
 var isAZeroZone = false;
 var led;
 
+var hasStartedExpe = false;
+
 board.on("ready", function() {
 
   led = new five.Led.RGB({
@@ -71,7 +73,7 @@ ledB = new five.Led(11);*/
   // Assuming a button is attached to pin 9
   this.pinMode(2, five.Pin.INPUT);
   this.digitalRead(2, function(value) {
-    //console.log(value);
+    console.log("digitalpin2"+value);
 
   	if(value == 0 && isAZeroZone == false) {
 	    cptnb += 1;
@@ -89,34 +91,22 @@ ledB = new five.Led(11);*/
   this.digitalRead(3, function(value) {
     //console.log(value);
     //console.log("change blue");
-    setTimeout(function() {
-	    if(value == 1) {
-	    	console.log("FIN ");
-	    	console.log(cptnb);
+    
+        console.log("cpt ::::"+cptnb);
+      setTimeout(function() {
+        if(value == 1) {
+          console.log("FIN ");
+          console.log(cptnb);
 
-	    	//io.on('connection', function(socket){
-	    		io.emit('composingNumEnded', cptnb);
-          led.on();
-
-          //ledR.fadeIn(500); ledG.fadeIn(500); ledB.fadeIn(500); 
-
-          /*setTimeout(function() {
-            led.off();
-          }, 3000);*/
-	    	//});
-
-        /*io.on('musicFinished', function(end){
-          console.log("music end");
-          led.off();
-        });*/
-
-	    	
-
-	    	//instruments.changeActiveInstrument;
-	    
-	    	cptnb = 0;
-	  	}
-  	}, 100);
+          //io.on('connection', function(socket){
+            io.emit('composingNumEnded', cptnb);
+            led.on();
+        
+          cptnb = 0;
+        }
+      }, 100);
+    
+    
   });
 });
 
