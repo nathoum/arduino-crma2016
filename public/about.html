@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Arduino</title>
+		<meta name="author" content="Diana Marchal & Nathalie Marchal" />
+		<meta name="description" content="Arduino - Retro telephone to learn instruments" />
+		<meta name="keywords"  content="arduino, iot, objets connectés, interface homme machine" />
+		<meta name="Resource-type" content="Document" />
+		<meta name="viewport" content="initial-scale=1.0">
+		<link rel="icon" type="image/png" sizes="16x16" href="imgs/favicon-16x16.png">
+
+		<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" type="text/css" href="css/examples.css" />
+		<link rel="stylesheet" type="text/css" href="css/about.css" />
+
+		<!-- Owl Carousel Assets -->
+	    <link href="css/vendors/owl.carousel.css" rel="stylesheet">
+	    <link href="css/vendors/owl.theme.css" rel="stylesheet">
+
+		<!--[if IE]>
+			<script type="text/javascript">
+				 var console = { log: function() {} };
+			</script>
+		<![endif]-->
+
+
+
+
+
+		
+
+	</head>
+	<body>
+
+		<div class="section section0" id="section0" >
+
+			<div class="menu">
+				<nav class="menu-wrapper">
+					<ul class="menu-list">
+						<li class="menu-item"><a href="index.html" class="menu-link">Intro - demo</a></li>
+						<li class="menu-item"><a href="experiment.html" class="menu-link">Experiment</a></li>
+						<li class="menu-item"><a href="about.html" class="menu-link">About</a></li>
+					</ul>
+				</nav>
+			</div>
+
+			<div class="wrapper wrapper--top"></div>
+			<div class="wrapper wrapper--bottom"></div>
+
+			<div class="navTrigger navTrigger--pink">
+			  <i></i><i></i><i></i>
+			</div>
+
+
+			<div class="carousel">
+
+				<div id="owl-demo" class="owl-carousel owl-theme">
+	 
+				  <div class="item carousel-item">
+				  	<!-- <img src="imgs/arduino-image.jpg" alt="arduino" /> -->
+				  	<h1 class="carousel-title">About</h1>
+				  	<p class="carousel-p">
+				  		This is a project that we, Nathalie and Diana Marchal created at Gobelins school during an Arduino workshop. <br>
+				  		The aim was to create a human-machine interface (HMI) using a rotary dial phone, those retro phones used by our grand parents!
+				  		With the reverse engineering process, we connected the phone to a server to display things and play sounds depending on the number we dialed...
+				  	</p>
+
+				  	<img src="img/arduino-image.jpg" class="">
+				  </div>
+
+				  <div class="item">
+				  	<h1 class="carousel-title">Usage</h1>
+				  	<img src="img/mode_emploi_en.png" class="">
+				  </div>
+
+				  <div class="item">
+				  	<h1 class="carousel-title">Schema</h1>
+				  	<img src="img/schema_interface_en.png" class="">
+				  </div>
+
+				  <div class="item">
+				  	<h1 class="carousel-title">Technologies</h1>
+
+				  	<img src="img/logo-arduino.jpg" class="logo-img">
+				  	<img src="img/logo-nodejs.png" class="logo-img">
+				  	<img src="img/logo-johnnyfive.jpg" class="logo-img">
+
+				  	<ul>
+				  		<li>Arduino: A UNO card to connect the dial rotatary phone cables with the web server</li><br>
+				  		<li>HTML5 and javaScript: we used the HTML5 audio API to get the audio amplitude and play sound.</li>
+				  		<li>Node.js: to access the dial signals with the web server. We used websockets to send it to the computer interface in javascript. We also sent the audio amplitude to the arduino led components to change the light intensity</li>
+				  		<li>Johnny five: </li>
+				  	</ul>
+
+
+				  </div>
+				 
+				</div>
+
+			</div>
+
+
+		</div>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+		<script src="js/vendors/owl.carousel.min.js"></script>
+
+		<script type="text/javascript" src="js/carousel.js"></script>
+		<script type="text/javascript" src="js/examples.js"></script>
+
+		
+		
+
+
+	</body>
+</html>

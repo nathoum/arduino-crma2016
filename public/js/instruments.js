@@ -439,9 +439,9 @@ window.requestAnimFrame = (function () {
         //msg.text = instrumentSelected;
         //msg.lang = 'en-US';
 
-        msg.onend = function(e) {
+        /*msg.onend = function(e) {
           console.log('Finished in ' + event.elapsedTime + ' seconds.');
-        };
+        };*/
 
         speechSynthesis.speak(msg);
 

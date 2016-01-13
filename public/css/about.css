@@ -1,0 +1,31 @@
+
+.carousel {
+	position: absolute;
+	width: 80%;
+	left: 50%;
+	top: 50%;
+	color: grey;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	-o-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+
+	/*-webkit-font-smoothing: subpixel-antialiased;*/
+
+	/*-webkit-font-smoothing: subpixel-antialiased;
+	-webkit-transform: translateX(-50%) translateY(-50%) scale(1.0, 1.0);*/
+}
+
+	.carousel-title {
+		margin-bottom: 25px;
+	}
+
+		.logo-img {
+			width: 20%;
+			margin-top: 35px;
+		}
+
+		.carousel-p {
+			margin-bottom: 100px;
+		}
