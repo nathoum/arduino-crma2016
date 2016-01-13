@@ -37,39 +37,46 @@ window.requestAnimFrame = (function () {
 
 	socket.on('composingNumEnded', function(numberDial){
     	console.log('composingNumEnded: ' + numberDial);
-    	numberSelected = numberDial;
-    	numeroCorrespondanceInstrument(numberDial);
-    	console.log("instru - "+instrumentSelected);
+        isPlayingSound = false;
+        if(numberDial > 0 && numberDial <= 10) {
+            numberSelected = numberDial;
+            numeroCorrespondanceInstrument(numberDial);
+            console.log("instru - "+instrumentSelected);
 
-    	changeActiveInstrument(numberSelected, instrumentSelected);
-    	//change("guitare.mp3");
+            changeActiveInstrument(numberSelected, instrumentSelected);
+            //change("guitare.mp3");
 
-    	numeroCorrespondanceMusic(numberDial);
-    	//setupAudioNodes();
-    	//setupAudioNodes();
-    	//setupAudioNodes();
+            numeroCorrespondanceMusic(numberDial);
+
+            setupAudioNodes();
+
+            setTimeout(function() {
+            
+
+            
+            javascriptNode.onaudioprocess = function() {
+
+                // get the average for the first channel
+                var array =  new Uint8Array(analyser.frequencyBinCount);
+                analyser.getByteFrequencyData(array);
+                average = getAverageVolume(array);
+
+                // get the average for the second channel
+                var array2 =  new Uint8Array(analyser2.frequencyBinCount);
+                analyser2.getByteFrequencyData(array2);
+                average2 = getAverageVolume(array2);
 
 
-    	javascriptNode.onaudioprocess = function() {
+            }
 
-	        // get the average for the first channel
-	        var array =  new Uint8Array(analyser.frequencyBinCount);
-	        analyser.getByteFrequencyData(array);
-	        average = getAverageVolume(array);
+             loadSound(instrumentPathMusic);
+            }, 300);
+        } else {
+            console.log("aucun num correspondant");
+        }
+    	
+        
 
-	        // get the average for the second channel
-	        var array2 =  new Uint8Array(analyser2.frequencyBinCount);
-	        analyser2.getByteFrequencyData(array2);
-	        average2 = getAverageVolume(array2);
-
-
-	    }
-
-    	loadSound(instrumentPathMusic);
-
-    	/*setTimeout(function() {
-    		console.log("average : "+ average);
-    	}, 500);*/
   	});
 
     console.log( "ready!" );
@@ -405,7 +412,7 @@ window.requestAnimFrame = (function () {
     function onEnded() {
 	    console.log('playback finished');
 	    //setupAudioNodes();
-	    setupAudioNodes();
+	    //setupAudioNodes();
 	    isPlayingSound = false;
 	    socket.emit('musicFinished', "end");
 	    
