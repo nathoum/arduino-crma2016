@@ -162,7 +162,17 @@ window.requestAnimFrame = (function () {
             changeActiveInstrument(numberSelected, instrumentSelected);
             numeroCorrespondanceMusic(numberSelected);
 			console.log( "9" );
-		}
+		} else if ( event.which == 48 ) {
+
+            $(".audioDemo").trigger('stop');
+            event.preventDefault();
+            numberSelected = 10;
+            numeroCorrespondanceInstrument(numberSelected);
+            console.log("instru - "+instrumentSelected);
+            changeActiveInstrument(numberSelected, instrumentSelected);
+            numeroCorrespondanceMusic(numberSelected);
+            console.log( "0 --> 10" );
+        }
 	});
 
 	function change(sourceUrl) {
@@ -182,6 +192,7 @@ window.requestAnimFrame = (function () {
 		var selectorNumber = ".Menu-item--"+number;
 		$(selectorNumber).addClass("Menu-item--active");
 
+        $(".Svg-area").fadeOut();
         
 
 
@@ -199,10 +210,10 @@ window.requestAnimFrame = (function () {
 
         setTimeout(function(){
         /**** les svg instruments ***/
-            $(".Svg-area").hide();
+            //$(".Svg-area").hide();
             $(".Svg-area path").attr("class", "");
             var selectorSvgInstrument = ".Svg-area-"+number;
-            $(selectorSvgInstrument).fadeIn();
+            $(selectorSvgInstrument).show();
             $(selectorSvgInstrument).find("path").attr("class", "Svg-item--dash");
         }, 1400);
 

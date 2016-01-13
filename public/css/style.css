@@ -435,7 +435,7 @@ body, html {
 	fill: black;
 	stroke: black !important;
 	/*stroke-width: 5px;*/
-	stroke-dasharray: 1300;
+	stroke-dasharray: 1450;
 	stroke-dashoffset: 1300;
 	animation: dash 2.0s linear forwards;
 }
