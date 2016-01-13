@@ -404,6 +404,42 @@ body, html {
 	transform: translate(-50%, -50%);
 }
 
+
+
+.Svg-area {
+	/*background-color: grey;*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    opacity: 0.2;
+    max-width: 300px;
+    display: none;
+}
+
+
+
+.Svg-item path {
+	fill: transparent;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+    stroke: black;
+  }
+}
+
+.Svg-item--dash {
+	fill: black;
+	stroke: black !important;
+	/*stroke-width: 5px;*/
+	stroke-dasharray: 1300;
+	stroke-dashoffset: 1300;
+	animation: dash 2.0s linear forwards;
+}
+
 /*.Menu-item--1 .Icon {
 	width: 100%;
 }*/

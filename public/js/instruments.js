@@ -85,30 +85,23 @@ window.requestAnimFrame = (function () {
 
 		//$(".link--urpi").removeClass("splitdown").removeClass("splitup").removeClass("link-anim");
 
-		if ( event.which == 48 ) {
-
-			event.preventDefault();
-			numberSelected = 0;
-			instrumentSelected = "guitar";
-			changeActiveInstrument(numberSelected, instrumentSelected);
-
-			change("guitare.mp3");
-			console.log( "0" );
-		} else if ( event.which == 49 ) {
+		 if ( event.which == 49 ) {
 
 			$(".audioDemo").trigger('stop');
 			event.preventDefault();
 			numberSelected = 1;
 			numeroCorrespondanceInstrument(numberSelected);
-			changeActiveInstrument(numberSelected, instrumentSelected);
-
-			change("battery.mp3");
+            console.log("instru - "+instrumentSelected);
+            changeActiveInstrument(numberSelected, instrumentSelected);
+            numeroCorrespondanceMusic(numberSelected);
 			console.log( "1" );
 		} else if ( event.which == 50 ) {
 			event.preventDefault();
 			numberSelected = 2;
 			numeroCorrespondanceInstrument(numberSelected);
-			changeActiveInstrument(numberSelected, instrumentSelected);
+            console.log("instru - "+instrumentSelected);
+            changeActiveInstrument(numberSelected, instrumentSelected);
+            numeroCorrespondanceMusic(numberSelected);
 
 			console.log( "2" );
 		} else if ( event.which == 51 ) {
@@ -116,44 +109,58 @@ window.requestAnimFrame = (function () {
 			event.preventDefault();
 			numberSelected = 3;
 			numeroCorrespondanceInstrument(numberSelected);
-			changeActiveInstrument(numberSelected, instrumentSelected);
+            console.log("instru - "+instrumentSelected);
+            changeActiveInstrument(numberSelected, instrumentSelected);
+            numeroCorrespondanceMusic(numberSelected);
 			console.log( "3" );
 		} else if ( event.which == 52 ) {
 
 			event.preventDefault();
 			numberSelected = 4;
 			numeroCorrespondanceInstrument(numberSelected);
-			changeActiveInstrument(numberSelected, instrumentSelected);
+            console.log("instru - "+instrumentSelected);
+            changeActiveInstrument(numberSelected, instrumentSelected);
+            numeroCorrespondanceMusic(numberSelected);
 			console.log( "4" );
 		} else if ( event.which == 53 ) {
 			event.preventDefault();
 			numberSelected = 5;
 			numeroCorrespondanceInstrument(numberSelected);
-			changeActiveInstrument(numberSelected, instrumentSelected);
+            console.log("instru - "+instrumentSelected);
+            changeActiveInstrument(numberSelected, instrumentSelected);
+            numeroCorrespondanceMusic(numberSelected);
 			console.log( "5" );
 		} else if ( event.which == 54 ) {
 			event.preventDefault();
 			numberSelected = 6;
 			numeroCorrespondanceInstrument(numberSelected);
-			changeActiveInstrument(numberSelected, instrumentSelected);
+            console.log("instru - "+instrumentSelected);
+            changeActiveInstrument(numberSelected, instrumentSelected);
+            numeroCorrespondanceMusic(numberSelected);
 			console.log( "6" );
 		} else if ( event.which == 55 ) {
 			event.preventDefault();
 			numberSelected = 7;
 			numeroCorrespondanceInstrument(numberSelected);
-			changeActiveInstrument(numberSelected, instrumentSelected);
+            console.log("instru - "+instrumentSelected);
+            changeActiveInstrument(numberSelected, instrumentSelected);
+            numeroCorrespondanceMusic(numberSelected);
 			console.log( "7" );
 		} else if ( event.which == 56 ) {
 			event.preventDefault();
 			numberSelected = 8;
 			numeroCorrespondanceInstrument(numberSelected);
-			changeActiveInstrument(numberSelected, instrumentSelected);
+            console.log("instru - "+instrumentSelected);
+            changeActiveInstrument(numberSelected, instrumentSelected);
+            numeroCorrespondanceMusic(numberSelected);
 			console.log( "8" );
 		} else if ( event.which == 57 ) {
 			event.preventDefault();
-			numberSelected = 9;
+            numberSelected = 9;
 			numeroCorrespondanceInstrument(numberSelected);
-			changeActiveInstrument(numberSelected, instrumentSelected);
+            console.log("instru - "+instrumentSelected);
+            changeActiveInstrument(numberSelected, instrumentSelected);
+            numeroCorrespondanceMusic(numberSelected);
 			console.log( "9" );
 		}
 	});
@@ -175,6 +182,9 @@ window.requestAnimFrame = (function () {
 		var selectorNumber = ".Menu-item--"+number;
 		$(selectorNumber).addClass("Menu-item--active");
 
+        
+
+
 		$(".link--urpi").addClass("splitdownout").addClass("splitupout").addClass("link-anim");
 
 		setTimeout(function(){
@@ -182,7 +192,19 @@ window.requestAnimFrame = (function () {
 			$(".link--urpi").text(instrument);
 			$(".link--urpi").attr("data-letters", instrument);
 			$(".link--urpi").addClass("splitdownin").addClass("splitupin");
+
+
+
 		}, 800);
+
+        setTimeout(function(){
+        /**** les svg instruments ***/
+            $(".Svg-area").hide();
+            $(".Svg-area path").attr("class", "");
+            var selectorSvgInstrument = ".Svg-area-"+number;
+            $(selectorSvgInstrument).fadeIn();
+            $(selectorSvgInstrument).find("path").attr("class", "Svg-item--dash");
+        }, 1400);
 
 		setTimeout(function(){
 			$(".link--urpi").removeClass("splitdownin").removeClass("splitupin");
@@ -418,7 +440,7 @@ window.requestAnimFrame = (function () {
 
     animate();
 	function animate() {
-		console.log('average '+ average);
+		//console.log('average '+ average);
 	    requestAnimationFrame(animate);
 	    if( average > 0 && isPlayingSound == true) {
 	    	//console.log('average '+ average);
