@@ -219,6 +219,14 @@ body{
         text-decoration: none;
       }
 
+      .menu-link:hover {
+        font-weight: bold;
+      }
+
+      .menu-item--active .menu-link {
+        font-weight: bold;
+      }
+
 
 /*********************/
 /* LAYER PATTERN */ 

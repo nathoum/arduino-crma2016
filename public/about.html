@@ -42,7 +42,7 @@
 					<ul class="menu-list">
 						<li class="menu-item"><a href="index.html" class="menu-link">Intro - demo</a></li>
 						<li class="menu-item"><a href="experiment.html" class="menu-link">Experiment</a></li>
-						<li class="menu-item"><a href="about.html" class="menu-link">About</a></li>
+						<li class="menu-item menu-item--active"><a href="about.html" class="menu-link">About</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -63,22 +63,34 @@
 				  	<!-- <img src="imgs/arduino-image.jpg" alt="arduino" /> -->
 				  	<h1 class="carousel-title">About</h1>
 				  	<p class="carousel-p">
-				  		This is a project that we, Nathalie and Diana Marchal created at Gobelins school during an Arduino workshop. <br>
-				  		The aim was to create a human-machine interface (HMI) using a rotary dial phone, those retro phones used by our grand parents!
-				  		With the reverse engineering process, we connected the phone to a server to display things and play sounds depending on the number we dialed...
+				  		Projet réalisé par Diana & Nathalie Marchal, créé à Gobelins à l'occasion d'un workshop Arduino. <br>
+				  		Nous avions pour but de créer une interface homme-machine (IHM) en utilisant un téléphone à cadran rotatif. <br>Avec le processus de reverse engineering, nous avons connecté le téléphone à un serveur web pour jouer des sons en animant l’instrument joué à l’écran en fonction du numéro composé.
 				  	</p>
 
-				  	<img src="img/arduino-image.jpg" class="">
+				  	<img src="img/project-interface-small.jpg" alt="Picture of the project interface" class="project-pic" />
+				  	<img src="img/project-schema-pic-small.jpg" alt="Picture of the project components" class="project-pic" />
+
+				  	<p class="info-expe">Expérience optimisée pour Chrome 33+</p>
+				  </div>
+
+				  <div class="item">
+				  	<h1 class="carousel-title">Concept</h1>
+				  	<p class="carousel-p">
+				  		Nous voulions créer un dispositif adressé aux enfants, à travers la découverte musicale et l’éveil sonore. 
+				  		<br>En fait, on est parties du constat que les enfants aiment manipuler les objets du quotidien, en particulier des téléphones.
+						On vous présente donc Rototo, le rotaphone qui permet aux plus petits d’apprendre l’anglais et les instruments de manière ludique !
+				  	</p>
+				  	<img src="img/rototo-pic-2.jpg" alt="Rototo phone" class="project-pic" /> 
 				  </div>
 
 				  <div class="item">
 				  	<h1 class="carousel-title">Usage</h1>
-				  	<img src="img/mode_emploi_en.png" class="">
+				  	<img src="img/mode_emploi_fr_2.png">
 				  </div>
 
 				  <div class="item">
-				  	<h1 class="carousel-title">Schema</h1>
-				  	<img src="img/schema_interface_en.png" class="">
+				  	<h1 class="carousel-title">Schéma</h1>
+				  	<img src="img/schema_interface_fr.png">
 				  </div>
 
 				  <div class="item">
@@ -89,10 +101,9 @@
 				  	<img src="img/logo-johnnyfive.jpg" class="logo-img">
 
 				  	<ul class="Techno-ul">
-				  		<li><span>Arduino:</span> A UNO card to connect the dial rotatary phone cables with the web server.</li>
-				  		<li><span>HTML5 and javaScript:</span> we used the HTML5 audio API to get the audio amplitude and play sound.</li>
-				  		<li><span>Node.js:</span> to access the dial signals with the web server. We used websockets to send it to the computer interface in javascript. We also sent the audio amplitude to the arduino led components to change the light intensity.</li>
-				  		<li><span>Johnny five:</span></li>
+				  		<li><span>Arduino : </span>nous avons utilisé une carte arduino UNO pour connecter les câbles du téléphone à cadran rotatif au serveur web.</li>
+				  		<li><span>HTML5 & javaScript : </span>on a utilisé l’API audio HTML5 pour récupérer l’amplitude sonore et jouer des sons.</li>
+				  		<li><span>Node.js & Johnny Five : </span>pour accéder aux signaux créés par la composition d’un numéro, on a utilisé les websockets pour envoyer ces données à l’interface web en javascript. Grâce à NodeJS on a aussi envoyé l’amplitude audio aux composants de l’arduino (à la LED) pour changer l’intensité de la lumière en fonction du rythme de la musique.</li>
 				  	</ul>
 
 

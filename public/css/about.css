@@ -28,10 +28,13 @@
 
 		.carousel-p {
 			margin-bottom: 100px;
+			width: 75%;
+    		max-width: 850px;
+    		margin: 0 auto;
 		}
 
 .Techno-ul {
-	text-align: left;
+	margin-top: 50px;
 }
 
 .Techno-ul li {
@@ -40,4 +43,10 @@
 
 .Techno-ul li span {
 	font-weight: bold;
+}
+
+.project-pic {
+	width: 100%;
+	max-width: 500px;
+	margin-top: 20px;
 }
