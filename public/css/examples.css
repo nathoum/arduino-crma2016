@@ -252,7 +252,7 @@ body{
 	margin-bottom: 35px;
 }
 
-.layer a{
+/*.layer a{
 	color: white;
 	border: solid 1px white;
 	font-size: 24px;
@@ -265,7 +265,7 @@ body{
 	width: 190px;
 	line-height: 40px;
 	padding-left: 20px;
-}
+}*/
 
 .pattern { 
 	background: url("../img/pattern.png");
@@ -382,6 +382,7 @@ input:checked + .toggle .toggle__handler {
 /*********************/
 
 .button {
+    display: block;
      -webkit-box-flex: 1;
     -webkit-flex: 1 1 auto;
     -ms-flex: 1 1 auto;
@@ -398,6 +399,7 @@ input:checked + .toggle .toggle__handler {
     color: #fff;
     width: 30%;
     margin: 0 auto;
+    max-width: 180px;
 }
 .button:after {
   position: absolute;

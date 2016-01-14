@@ -29,3 +29,15 @@
 		.carousel-p {
 			margin-bottom: 100px;
 		}
+
+.Techno-ul {
+	text-align: left;
+}
+
+.Techno-ul li {
+	margin-top: 10px;
+}
+
+.Techno-ul li span {
+	font-weight: bold;
+}

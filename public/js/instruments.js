@@ -281,7 +281,7 @@ window.requestAnimFrame = (function () {
         	break;
 
         	case 8:
-        		instrumentPathMusic = "./audio/accordion.mp3";
+        		instrumentPathMusic = "./audio/accordion-2.mp3";
         	break;
 
         	case 9:
