@@ -43,41 +43,9 @@ window.requestAnimFrame = (function () {
         isPlayingSound = false;
         if(numberDial > 0 && numberDial <= 10) {
             numberSelected = numberDial;
-            numeroCorrespondanceInstrument(numberDial);
-            console.log("instru - "+instrumentSelected);
 
-            changeActiveInstrument(numberSelected, instrumentSelected);
-            //change("guitare.mp3");
-
-            numeroCorrespondanceMusic(numberDial);
-
+            whenNumComposedLaunchInstrument();
             
-
-
-
-            setupAudioNodes();
-
-            setTimeout(function() {
-            
-
-            
-            javascriptNode.onaudioprocess = function() {
-
-                // get the average for the first channel
-                var array =  new Uint8Array(analyser.frequencyBinCount);
-                analyser.getByteFrequencyData(array);
-                average = getAverageVolume(array);
-
-                // get the average for the second channel
-                var array2 =  new Uint8Array(analyser2.frequencyBinCount);
-                analyser2.getByteFrequencyData(array2);
-                average2 = getAverageVolume(array2);
-
-
-            }
-
-             loadSound(instrumentPathMusic);
-            }, 300);
         } else {
             console.log("aucun num correspondant");
         }
@@ -87,6 +55,36 @@ window.requestAnimFrame = (function () {
   	});
 
     console.log( "ready!" );
+
+    function whenNumComposedLaunchInstrument() {
+        numeroCorrespondanceInstrument(numberSelected);
+        console.log("instru - "+instrumentSelected);
+
+        changeActiveInstrument(numberSelected, instrumentSelected);
+
+        numeroCorrespondanceMusic(numberSelected);
+
+        setupAudioNodes();
+
+        setTimeout(function() {
+        
+        javascriptNode.onaudioprocess = function() {
+
+            // get the average for the first channel
+            var array =  new Uint8Array(analyser.frequencyBinCount);
+            analyser.getByteFrequencyData(array);
+            average = getAverageVolume(array);
+
+            // get the average for the second channel
+            var array2 =  new Uint8Array(analyser2.frequencyBinCount);
+            analyser2.getByteFrequencyData(array2);
+            average2 = getAverageVolume(array2);
+
+        }
+
+         loadSound(instrumentPathMusic);
+        }, 300);
+    }
 
     
 
@@ -104,87 +102,57 @@ window.requestAnimFrame = (function () {
 			$(".audioDemo").trigger('stop');
 			event.preventDefault();
 			numberSelected = 1;
-			numeroCorrespondanceInstrument(numberSelected);
-            console.log("instru - "+instrumentSelected);
-            changeActiveInstrument(numberSelected, instrumentSelected);
-            numeroCorrespondanceMusic(numberSelected);
+			whenNumComposedLaunchInstrument();
 			console.log( "1" );
 		} else if ( event.which == 50 ) {
 			event.preventDefault();
 			numberSelected = 2;
-			numeroCorrespondanceInstrument(numberSelected);
-            console.log("instru - "+instrumentSelected);
-            changeActiveInstrument(numberSelected, instrumentSelected);
-            numeroCorrespondanceMusic(numberSelected);
+			whenNumComposedLaunchInstrument();
 
 			console.log( "2" );
 		} else if ( event.which == 51 ) {
 
 			event.preventDefault();
 			numberSelected = 3;
-			numeroCorrespondanceInstrument(numberSelected);
-            console.log("instru - "+instrumentSelected);
-            changeActiveInstrument(numberSelected, instrumentSelected);
-            numeroCorrespondanceMusic(numberSelected);
+			whenNumComposedLaunchInstrument();
 			console.log( "3" );
 		} else if ( event.which == 52 ) {
 
 			event.preventDefault();
 			numberSelected = 4;
-			numeroCorrespondanceInstrument(numberSelected);
-            console.log("instru - "+instrumentSelected);
-            changeActiveInstrument(numberSelected, instrumentSelected);
-            numeroCorrespondanceMusic(numberSelected);
+			whenNumComposedLaunchInstrument();
 			console.log( "4" );
 		} else if ( event.which == 53 ) {
 			event.preventDefault();
 			numberSelected = 5;
-			numeroCorrespondanceInstrument(numberSelected);
-            console.log("instru - "+instrumentSelected);
-            changeActiveInstrument(numberSelected, instrumentSelected);
-            numeroCorrespondanceMusic(numberSelected);
+			whenNumComposedLaunchInstrument();
 			console.log( "5" );
 		} else if ( event.which == 54 ) {
 			event.preventDefault();
 			numberSelected = 6;
-			numeroCorrespondanceInstrument(numberSelected);
-            console.log("instru - "+instrumentSelected);
-            changeActiveInstrument(numberSelected, instrumentSelected);
-            numeroCorrespondanceMusic(numberSelected);
+			whenNumComposedLaunchInstrument();
 			console.log( "6" );
 		} else if ( event.which == 55 ) {
 			event.preventDefault();
 			numberSelected = 7;
-			numeroCorrespondanceInstrument(numberSelected);
-            console.log("instru - "+instrumentSelected);
-            changeActiveInstrument(numberSelected, instrumentSelected);
-            numeroCorrespondanceMusic(numberSelected);
+			whenNumComposedLaunchInstrument();
 			console.log( "7" );
 		} else if ( event.which == 56 ) {
 			event.preventDefault();
 			numberSelected = 8;
-			numeroCorrespondanceInstrument(numberSelected);
-            console.log("instru - "+instrumentSelected);
-            changeActiveInstrument(numberSelected, instrumentSelected);
-            numeroCorrespondanceMusic(numberSelected);
+			whenNumComposedLaunchInstrument();
 			console.log( "8" );
 		} else if ( event.which == 57 ) {
 			event.preventDefault();
             numberSelected = 9;
-			numeroCorrespondanceInstrument(numberSelected);
-            console.log("instru - "+instrumentSelected);
-            changeActiveInstrument(numberSelected, instrumentSelected);
-            numeroCorrespondanceMusic(numberSelected);
+			whenNumComposedLaunchInstrument();
 			console.log( "9" );
 		} else if ( event.which == 48 ) {
 
             $(".audioDemo").trigger('stop');
             event.preventDefault();
             numberSelected = 10;
-            numeroCorrespondanceInstrument(numberSelected);
-            console.log("instru - "+instrumentSelected);
-            changeActiveInstrument(numberSelected, instrumentSelected);
-            numeroCorrespondanceMusic(numberSelected);
+            whenNumComposedLaunchInstrument();
             console.log( "0 --> 10" );
         }
 	});
@@ -285,7 +253,7 @@ window.requestAnimFrame = (function () {
 	function numeroCorrespondanceMusic(numberDial) {
 		switch (numberDial) {
     		case 1:
-        		instrumentPathMusic = "./audio/guitare.mp3";
+        		instrumentPathMusic = "./audio/guitar-2.mp3";
         	break;
 
         	case 2:
@@ -301,7 +269,7 @@ window.requestAnimFrame = (function () {
         	break;
 
         	case 5:
-        		instrumentPathMusic = "./audio/violin.wav";
+        		instrumentPathMusic = "./audio/violin-2.mp3";
         	break;
 
         	case 6:
@@ -321,7 +289,7 @@ window.requestAnimFrame = (function () {
         	break;
 
         	case 10:
-        		instrumentPathMusic = "./audio/flute.wav";
+        		instrumentPathMusic = "./audio/flute-2.mp3";
         	break;
         }
 
