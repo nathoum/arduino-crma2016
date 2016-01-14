@@ -21,8 +21,6 @@ app.get('/',function(req,res){
 
 //console.log("Running at Port 8080");
 
-//var instruments = require('./public/js/instruments.js');
-//console.log(instruments.changeActiveInstrument);
 var musics = require('./musics.js');
 console.log(musics);
 
@@ -41,34 +39,14 @@ board.on("ready", function() {
      blue: 11
    }
   });
-  // a.strobe(500);
 
 
   this.repl.inject({
     led: led
   });
 
-  //led.on();
   led.color("#E8AB9C");
-  // led.blink(1000);
-  
 
-  // this.repl.inject({
-  //   a: a
-  // });
-
-
-//******
-
-/*ledR = new five.Led(9); 
-ledG = new five.Led(10); 
-ledB = new five.Led(11);*/
-
-//setColor('blue');
-
-
-
-///******
 
   // Assuming a button is attached to pin 9
   this.pinMode(2, five.Pin.INPUT);
@@ -98,7 +76,6 @@ ledB = new five.Led(11);*/
           console.log("FIN ");
           console.log(cptnb);
 
-          //io.on('connection', function(socket){
             io.emit('composingNumEnded', cptnb);
             led.on();
         
@@ -111,11 +88,6 @@ ledB = new five.Led(11);*/
 });
 
 
-/*io.on('connection', function(socket){
-  socket.on('message', function(msg){
-    console.log('message: ' + msg);
-  });
-});*/
 http.listen(8080, function(){
   console.log('listening on *:8080');
 });
@@ -125,23 +97,13 @@ io.on('connection', function(socket){
   socket.on('musicFinished', function(msg){
     console.log('message: ' + msg);
     led.off();
-    //ledR.fadeOut(500); ledG.fadeOut(500); ledB.fadeOut(500);
   });
 
   socket.on('averageLoop', function(average){
     console.log('average Loop : ' + average);
     led.intensity(average);
-    //led.off();
-    //ledR.fadeOut(500); ledG.fadeOut(500); ledB.fadeOut(500);
   });
 
 });
 
 
-
-
-/*io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
-  });
-});*/

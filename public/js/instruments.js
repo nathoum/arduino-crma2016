@@ -1,17 +1,7 @@
-/*var express = require("express");
-var app     = express();
-var path    = require("path");
 
-var jquery = require("jQuery");*/
 
 $(document).ready(function () {
-      /*var sock = new io.Socket();
-      sock.on('message', function (data) {
-        var obj = JSON.parse(data);
-        if(obj.message) {
 
-       }
-      });*/
 
 window.requestAnimFrame = (function () {
 			    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function ( /* function */ callback, /* DOMElement */ element) {
@@ -29,14 +19,7 @@ window.requestAnimFrame = (function () {
 
     var isPlayingSound = false;
 
-    /*var msg = new SpeechSynthesisUtterance('Hello World');
-    window.speechSynthesis.speak(msg);*/
 
-
-
-	//socket.emit('message', "test");
-
-	//socket.emit('musicFinished', "end");
 
 	socket.on('composingNumEnded', function(numberDial){
     	console.log('composingNumEnded: ' + numberDial);
@@ -394,31 +377,11 @@ window.requestAnimFrame = (function () {
         msg.name = 'Google US English';
         msg.voiceURI = 'Google US English';
 
-        //var msg = new SpeechSynthesisUtterance(instrumentSelected);
-        //window.speechSynthesis.speak(msg);
-
-        /*var msg = new SpeechSynthesisUtterance();
-        var voices = window.speechSynthesis.getVoices();
-        msg.voice = voices[0]; // Note: some voices don't support altering params
-        /*msg.voiceURI = 'native';
-        msg.volume = 1; // 0 to 1
-        msg.rate = 1; // 0.1 to 10
-        msg.pitch = 2; //0 to 2*/
-        //msg.text = instrumentSelected;
-        //msg.lang = 'en-US';
-
-        /*msg.onend = function(e) {
-          console.log('Finished in ' + event.elapsedTime + ' seconds.');
-        };*/
 
         speechSynthesis.speak(msg);
 
 	    isPlayingSound = false;
 	    socket.emit('musicFinished', "end");
-
-
-	    
-
 
 	    
 	}
@@ -428,21 +391,7 @@ window.requestAnimFrame = (function () {
         console.log(e);
     }
 
-    // quand le noeud javascript est appelé on utilise l'information de l'analyseur pour se servir des données de volume
-    /*javascriptNode.onaudioprocess = function() {
 
-        // get the average for the first channel
-        var array =  new Uint8Array(analyser.frequencyBinCount);
-        analyser.getByteFrequencyData(array);
-        average = getAverageVolume(array);
-
-        // get the average for the second channel
-        var array2 =  new Uint8Array(analyser2.frequencyBinCount);
-        analyser2.getByteFrequencyData(array2);
-        average2 = getAverageVolume(array2);
-
-
-    }*/
 
     function getAverageVolume(array) {
         var values = 0;
