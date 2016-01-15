@@ -21,8 +21,8 @@ app.get('/',function(req,res){
 
 //console.log("Running at Port 8080");
 
-var musics = require('./musics.js');
-console.log(musics);
+//var musics = require('./musics.js');
+//console.log(musics);
 
 var cptnb = 0;
 var isAZeroZone = false;
